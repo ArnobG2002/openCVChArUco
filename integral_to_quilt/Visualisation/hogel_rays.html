@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Hogel Ray Viewer</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { color: #c9d1d9; font-family: monospace; overflow: hidden; }
+  canvas { display: block; cursor: crosshair; }
+
+  #hud {
+    position: fixed; top: 12px; left: 12px;
+    background: rgba(22,27,34,0.88);
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-size: 12px;
+    line-height: 1.8;
+    min-width: 230px;
+  }
+  #hud .label { color: #8b949e; }
+  #hud .val   { color: #79c0ff; }
+  #hud .tip   { color: #56d364; margin-top: 6px; font-size: 11px; line-height: 1.6; }
+  #hud .sep   { border: none; border-top: 1px solid #30363d; margin: 6px 0; }
+
+  #ratioSlider {
+    width: 100%;
+    accent-color: #79c0ff;
+    margin-top: 2px;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+
+<div id="hud">
+  <div><span class="label">hogels (N): </span><span class="val">819</span></div>
+  <div><span class="label">dir res (D): </span><span class="val">81</span></div>
+  <div><span class="label">display FOV: </span><span class="val">60°</span></div>
+  <hr class="sep">
+  <div><span class="label">cam FOV ratio: </span><span class="val" id="hRatio">0.5</span></div>
+  <input type="range" id="ratioSlider" min="0" max="1" step="0.01" value="0.5">
+  <div><span class="label">z_cam: </span><span class="val" id="hZ">–</span></div>
+  <hr class="sep">
+  <div><span class="label">cam idx: </span><span class="val" id="hCI">–</span></div>
+  <div><span class="label">x_cam: </span><span class="val" id="hCX">–</span></div>
+  <div><span class="label">θ: </span><span class="val" id="hCT">–</span></div>
+  <div class="tip">
+    A / D — step camera left / right<br>
+    scroll — zoom · drag — pan<br>
+    ` — toggle debug dots
+  </div>
+</div>
+
+<script src="hogel_rays.js"></script>
+</body>
+</html>
