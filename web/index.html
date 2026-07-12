@@ -7,6 +7,7 @@
 <!-- Bootstrap CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="westonvincze.css">
+<link rel="stylesheet" href="hover.css">
 <!-- Your custom CSS -->
 <!-- <link rel="stylesheet" href="styles.css"> -->
 </head>
@@ -39,17 +40,25 @@
     There was another figure in the paper that gave a better look of the character:
   </p>
   
-  <img src="https://ars.els-cdn.com/content/image/1-s2.0-S0031320314000235-gr15.jpg" alt="virtual scene"/>
-  <p>
-    It's definitely an ogre - I know when I see one - and then I remembered. This is Sinbad, OGRE's official mascot as of January 2010. 
-    The character design and 3D model were made by Zi Ye with input from the OGRE community. 
-    Sergio Garrido Jurado et al were free to use the model in their paper but given the licence Sinbad was under, they were supposed to give appropriate credit and indicate the change that was made; as seen in the figure, Sinbad is moving around a "virtual floor" which idk is copied from where.
-  </p>
   
+  
+  <div class="row">
+      <div class="col-xxl-7">
+        <img src="https://ars.els-cdn.com/content/image/1-s2.0-S0031320314000235-gr15.jpg" alt="virtual scene"/>
+      </div>
+      <div class="col-xxl-4">
+        
+        It's definitely an ogre - I know when I see one - and then I remembered. This is Sinbad, OGRE's official mascot as of January 2010. 
+        The character design and 3D model were made by Zi Ye with input from the OGRE community. 
+        Sergio Garrido Jurado et al were free to use the model in their paper but given the licence Sinbad was under, they were supposed to give appropriate credit and indicate the change that was made; as seen in the figure, Sinbad is moving around a "virtual floor" which idk is copied from where.
+      
+      </div>
+    </div>
   <h3>We shall do better.</h3>  
   <p>
     We shall do a better job at citation.
     <div class="animatedSprite" style="width: 819px; height: 455px;"></div>
+    
     The chess scene you saw in this page is an artwork by <a href="https://www.linkedin.com/in/mgcolbourne/">Matthew Colbourne</a> using the following assets from Polyhaven
     <div class="container py-4" id="polyhaven">
       <div class="row">
@@ -88,15 +97,133 @@
       </div>
     </div>
     
-    The scene was displayed on a <a href="https://lookingglassfactory.com/looking-glass-16-lightfield">16-inch Looking Glass display</a>.
+    According to Matt, he used a Python code written by <a href="https://www.linkedin.com/in/saad-equbal/">Saad Equbal</a> to generate a quilt of the scene. 
+    The Python code implements a method devised in <a href="https://www.cs.mun.ca/~mhamilton/papers/nwells-hamilton-Necec2021.pdf">the paper</a> by Wells and Hamilton: 
+    Having generated a light field image,
+    they needed to develop a method to view the generated images. 
+    This began with generating 2D images from the light field based on orthographic
+    projections of the light field (taking a single pixel from each hogel all corresponding the same light ray angle).
+    The quilt was displayed on a <a href="https://lookingglassfactory.com/looking-glass-16-lightfield">16-inch Looking Glass display</a>.
   </p>
-  <p>The simulator was developed by <a href="https://www.vaclab.ca/research/">VACLAB</a>. The camera pose estimation was done by Arnob - oh hi, that's me.</p>
+  <p>
+    The simulator was developed by <a href="https://www.vaclab.ca/research/">VACLAB</a>. 
+    The camera pose estimation was done by Arnob - oh hi, that's me. 
+  </p>
+  <p>
+    But observe the tiles in the quilt — that is, the frames in the animation above.
+  </p>
+  <div class="container">
+    <div class="row">
+      <div class="col-xxl-4">
+        <img src="orthoLRM/converted_quilt_left.png" alt="" style="width: 90%;">
+        <p>left</p>
+      </div>
+      <div class="col-xxl-4">
+        <img src="orthoLRM/converted_quilt_middle.png" alt="" style="width: 90%;">
+        <p>middle</p>
+      </div>
+      <div class="col-xxl-4">
+        <img src="orthoLRM/converted_quilt_right.png" alt="" style="width: 90%;">
+        <p>right</p>
+      </div>
+    </div>
+  </div>
+  <h3>Good around the left/right tiles, bad around the middle tiles</h3> 
+  <p>
+    The middle tiles correspond to direction <code>dx ≈ D/2</code> — all hogels looking straight ahead (θ ≈ 0). The left/right tiles correspond to extreme angles (θ ≈ ±θ_max).
+  </p>
+  <div class="container">
+    <div class="row">
+      <div class="col-xxl-2">
+        
+        The assembled view at the center direction (all hogels looking straight ahead simultaneously) is essentially an orthographic projection — every hogel contributes the pixel directly in front of it. In orthographic projection, near and far edges of the stool appear at their physical width, which for a rectangular stool means near = far. 
+        No <strong>foreshortening</strong>. So near doesn't appear wider than far.
+      
+      </div>
+      <div class="col">
+        <div style="position: relative;">
+          <img src="Jesus-modified.png" alt="" style="width: 40rem;">
+          <div style="" class="orange"></div>
+          <img src="image (1).png" alt="" class="ortho">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xxl-3">
+        <div>
+          The Spring 2018 offering of CS418 in Grainger Illinois had a whole lecture on <strong>orthographic projections</strong>.
+          The definition, used in the lecture, of the word "foreshortening" is a slight adaptation of that provided by <a href="https://webartacademy.com/classical-painting-techniques-in-renaissance">Web Art Academy</a> in January 2011, but <a href="https://courses.grainger.illinois.edu/cs418/sp2018/slides/CS418-Lecture9-OrthoProjection.pdf">the course slide</a> never cited it. 
+          The slide asks directly whether foreshortening can happen in orthographic projection and even answers itself that orthographic projection foreshortens, that is, if you look at the middle tile, the horizontal and vertical edges of the stool appear to be of different lengths — vertical shorter than horizontal — although the top plane of the 3D model is almost a square.
+          Why does one side of the stool appear shorter than another? Because the wooden stool is angled toward the viewer.
+        </div>
+      </div>
+      <div class="col" style="position: relative;">
+        <img src="orthoLRM/converted_quilt_middle_teal.png" alt="">
+        <div style="color: teal; font-size: 1.4rem; position: absolute; top: 10rem; right:20rem">horizontal</div>
+        <div style="color: teal; font-size: 1.4rem; position: absolute; top: 8rem; right:25rem">vertical</div>
+      </div>
+    </div>
+  
+    <div class="row">
+      When I said "no foreshortening," I meant that there is no foreshortening based on distance from a viewpoint.
+      Now if you look carefully you will see that the left/right tiles are no better. 
+      There is equally no foreshortening. The objects are not in true perspective, because they do not correspond to any view of an object that can be obtained in practice.
+      You realise that at a glance you only get an optical illusion that makes the stool "look better" at extreme angles.
+      At extreme angles, the 3D shape of the stool itself creates perspective-like cues — you see the side panels, legs become prominent... So those tiles accidentally look more correct.
+    </div>
+    <div class="row">
+      <div class="col-xxl-3">
+        The annotation on the middle tile using the cyan lines to understand the effects of the orthographic projection is inspired from <a href="https://www.essentialvermeer.com/technique/perspective/about-perspective.html">Essential Vermeer</a>.
+        They annotated on a painting by Torii Kiyonaga and commented that the Chinese have never had any scientific interest in perspective or its rules.
+        It is true that the objects in the painting show similar effect as those in our tiles, and their orthogonal sides recede along two main angles.
+        However, Torii Kiyonaga was not Chinese — he was Japanese. The person behind Essential Vermeer is Jonathan Janson, an American art historian — well that explains it.
+      </div>
+      <div class="col">
+        <img src="https://www.essentialvermeer.com/technique/perspective/images/kyonaga.jpg" alt="">
+      </div>
+      <div class="col"><img src="https://i.redd.it/sbzcsucm27j61.jpg" alt="" style="width: 20rem;"></div>
+    </div>
+  </div>
+  
+  <h3>Shall we extend Saad's Python code?</h3>
+  <p>
+    The Python code does a light field assembly — one pixel per hogel at a fixed direction. 
+    This produces an orthographic view at center direction. 
+  </p>
+  <p>
+    Only at center direction? What view is produced at other directions — say at extreme angles?
+    Depends on your definition of "orthographic projection." 
+    The CS418 lecture would argue that a view at any other direction is produced by oblique parallel projection which is different from an orthographic projection where the projectors are orthogonal to the view plane.
+    The Wells and Hamilton paper would not differentiate between orthographic and oblique parallel projections: they never used the term "parallel projection" but they used the definition of parallel projections to explain what they meant by "orthographic projections".
+  </p>
+  <div class="container">
+    <div class="row">
+      <div class="col-xxl-4">
+        <p>
+          Is this a university thing as CS418 is from Illinois while Wells and Hamilton are from MUN? That's what my initial thought was till I found <a href="https://saurabhg.web.illinois.edu/teaching/ece549/sp2023/slides/lec02_perspective.pdf">the lecture</a> from Spring 2023 offering of ECE549 from Illinois university.
+          Let alone differentiating orthographic from general parallel projection, the lecture claims that parallel and perspective views are not like chalk and cheese as one may think — in lieu, parallel projection is just a special case of perspective projection — now who saw that coming!
+          Interesting. We shall broaden our project to include perspective projection. But seems like a lame justification to include a feature just because we can — would a light field display ever require generation of perspective views?
+        </p>
+      </div>
+      <div class="col">
+        <img src="Sim.png" alt="" style="width: 24rem">
+      </div>
+    </div>
+  </div>
+  
+  <p>
+    In 2025, <a href="https://arxiv.org/html/2508.18540v1">the paper</a> showcased a demo running on a desktop equipped with a Looking Glass 16” Light Field Display, the same light field display we had used.
+    According to them, light field displays require the generation of multiple <strong>perspective views</strong> to reconstruct the full light field.
+    Generation of a perspective view requires a <a href="https://docs.unity3d.com/6000.5/Documentation/Manual/CameraRays.html">Unity-inspired camera</a> that can cast a ray and fetch information about what the ray hits.
+  </p>
+  <p>This requires knowing the camera distance and light field attributes — parameters not in the original script at all. That's why it can't be fixed with a simple line change.</p>
+
   <h3>Did you know?</h3>
   <p>
-    Although in the <a href="https://www.sciencedirect.com/science/article/pii/S0031320314000235">paper</a> they applied their fiducial markers for camera pose estimation, the OpenCV implementation of ArUco does not track the camera but tracks the fiducial object.
+    Although in <a href="https://www.sciencedirect.com/science/article/pii/S0031320314000235">the paper</a> they applied their fiducial markers for camera pose estimation, the OpenCV implementation of ArUco does not track the camera but tracks the fiducial object.
     Tracking an object using a camera means continuously identifying its location when either the object or the camera are moving. 
     3D tracking aims at continuously recovering all six degrees of freedom that define the camera position and orientation relative to the scene, or, equivalently, the 3D displacement of an object relative to the camera.
-    Now given the figures of the virtual scene the paper contains, some 3D tracking obvoiusly took place but we do not know which API they used, or in what format the API took the six degrees of freedom to give the virtual scene.
+    Now given the figures of the virtual scene the paper contains, some 3D tracking obviously took place but we do not know which API they used, or in what format the API took the six degrees of freedom to give the virtual scene.
     Did they feed the pose of the camera to the API or did they feed the pose of the object to the API? 
     Not sure if "API" is the proper term but I am using it in the sense that 3D tracking must be one program and projecting a virtual scene must be another so there may be an "API" connecting these two.
     Is the program that projects the virtual scene made by them from scratch?

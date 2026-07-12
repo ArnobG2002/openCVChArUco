@@ -1,0 +1,14 @@
+.orange{
+width: 8rem;height: 6rem; position: absolute; top:16rem; left:32rem
+}
+.orange:hover{
+background-color: rgba(255, 166, 0, 0.525);
+}
+.orange:hover+.ortho{
+display: block;
+}
+.ortho{
+width: 20rem;
+display: none;
+position: absolute; top:15.5rem; left:42rem
+}

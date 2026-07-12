@@ -1,7 +1,7 @@
 .animatedSprite {
   
   background-image: url("./converted_quilt.png");
-
+  /* background-repeat: no-repeat; */
   /* duration, timing function, number of iterations, animation name */
   animation: 9s steps(81) infinite sprite-animation;
 }

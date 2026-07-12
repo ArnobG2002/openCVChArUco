@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conversation: stool Problem to v3</title>
+<style>
+  body {
+    font-family: Georgia, serif;
+    max-width: 70rem;
+    margin: 48px auto;
+    padding: 0 24px;
+    background: #fafafa;
+    color: #222;
+    line-height: 1.7;
+  }
+  h1 {
+    font-size: 1.3em;
+    font-weight: normal;
+    color: #555;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 36px;
+  }
+  .q {
+    background: #eef3f8;
+    border-left: 4px solid #3a6fa6;
+    padding: 14px 18px;
+    margin: 28px 0 8px 0;
+    border-radius: 0 6px 6px 0;
+    white-space: pre-wrap;
+    font-family: Georgia, serif;
+    font-size: 0.97em;
+  }
+  .a {
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 18px 22px;
+    margin: 8px 0 28px 0;
+    border-radius: 6px;
+    font-size: 0.97em;
+  }
+  .b{
+    color: #007700;
+  }
+  .c{
+    color: #005500;
+  }
+  .a p { margin: 0 0 10px 0; }
+  .a p:last-child { margin-bottom: 0; }
+  pre {
+    background: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 12px 16px;
+    overflow-x: auto;
+    font-size: 0.88em;
+    line-height: 1.5;
+  }
+  code { font-family: 'Courier New', monospace; font-size: 0.92em; }
+  .a strong { color: #1a1a1a; }
+  ul, ol { margin: 8px 0 8px 20px; padding: 0; }
+  li { margin-bottom: 4px; }
+  stool { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 0.93em; }
+  th { background: #3a6fa6; color: #fff; padding: 8px 12px; text-align: left; }
+  td { border: 1px solid #ccc; padding: 7px 12px; }
+  tr:nth-child(even) td { background: #f6f9fc; }
+  hr { border: none; border-top: 1px solid #e0e0e0; margin: 40px 0; }
+
+  .orange{
+    width: 8rem;height: 6rem; position: absolute; top:16rem; left:32rem
+  }
+  .orange:hover{
+    background-color: rgba(255, 166, 0, 0.525);
+  }
+  .orange:hover+.ortho{
+    display: block;
+  }
+  .ortho{
+    width: 20rem;
+    display: none;
+    position: absolute; top:15.5rem; left:42rem
+  }
+</style>
+</head>
+<body>
+
+<h1>From the stool problem to integral_to_quilt_v4.py</h1>
+
+
+<!-- Exchange 2 -->
+<div class="q">
+Good around the left/right tiles, bad around the middle tiles</div>
+<div class="a">
+<p>The middle tiles correspond to direction <code>dx ≈ D/2</code> — all hogels looking straight ahead (θ ≈ 0). The left/right tiles correspond to extreme angles (θ ≈ ±θ_max).</p>
+<p>
+  The assembled view at the center direction (all hogels looking straight ahead simultaneously) is essentially an orthographic projection — every hogel contributes the pixel directly in front of it. In orthographic projection, near and far edges of the stool appear at their physical width, which for a rectangular stool means near = far. 
+  No <strong>foreshortening</strong>. So near doesn't appear wider than far — and the observer perceives this as near appearing "shorter."
+</p>
+<div style="position: relative;">
+  <img src="Jesus-modified.png" alt="" style="width: 40rem;">
+  <div style="" class="orange"></div>
+  <img src="image (1).png" alt="" class="ortho">
+</div>
+<p class="c">
+  The above definition of "foreshortening" was provided by <a href="https://webartacademy.com/classical-painting-techniques-in-renaissance">The Web Art Academy</a> in January 2011. 
+  Eric Shaffer, professor at University of Illinois at Urbana-Champaign, used this definition in <a href="https://courses.grainger.illinois.edu/cs418/sp2018/slides/CS418-Lecture9-OrthoProjection.pdf">the lecture</a> in Spring 2018 without citing or referring to The Web Art Academy. 
+  As seen in the screenshot above, the slide for the lecture asks directly whether foreshortening can happen in orthographic projection.
+  A later slide then lists, under "Orthographic Projection," both "Foreshortens" and "No change in size by depth."
+</p>
+
+<p>At extreme angles, the 3D shape of the stool itself creates perspective-like cues — you see the side panels, legs become prominent, the near face becomes larger naturally from the scene geometry. So those tiles accidentally look more correct.</p>
+<p><strong>The fundamental issue is this:</strong></p>
+<div class="b">
+  Having generated a light field image, <a href="https://www.cs.mun.ca/~mhamilton/papers/nwells-hamilton-Necec2021.pdf">the necec2021 paper</a> 
+  needed to develop a method to view the generated images. 
+  This began with generating 2D images from the light field based on orthographic
+  projections of the light field (taking a single pixel from each hogel all corresponding the same light ray angle).
+</div>
+<span class="c">
+  Saad's Python code follows this method. 
+  The Python code is not publicly available and I am grateful to Matthew Hamilton (one of the authors of the paper) for giving me access to it.
+  The code clarifies that although in the necec2021 paper the word "parallel" does not even exist, by "orthographic projections" they implied "parallel projections";
+  and it is not essentially a mistake in choice of words — there are lectures and academic materials that use "orthographic projection" and "parallel projection" synonymously.
+</span>
+<p>
+  The Python code does a light field assembly — one pixel per hogel at a fixed direction. 
+  This produces an orthographic view at center direction. 
+</p>
+
+<div class="c">
+  In this project I allow generation of both parallel and perspective views. 
+  Reason for including perspective views: According to <a href="https://arxiv.org/html/2508.18540v1">the nvidia paper</a>
+  light field displays require the generation of multiple perspective views to reconstruct the full light field, necessitating a dense array of rays projected at precise angles.
+  For that I needed to develop a <a href="https://docs.unity3d.com/6000.5/Documentation/Manual/CameraRays.html">Unity-inspired camera</a> that can cast a ray and fetch information about what the ray hits. 
+  This project uses ray tracing technology which involves the ability to cast a ray (a line) from 
+  a starting point in a space into a direction.
+</div>
+<p>This requires knowing the camera distance and light field attributes — parameters not in the original script at all. That's why it can't be fixed with a simple line change.</p>
+</div>
+
+
+
+<!-- Exchange 5 -->
+<div class="q">
+    
+    "lightFieldAttributes": {
+        "spatialResolution": [819, 455],
+        "directionalResolution": [81, 1],
+        "displayFOV": [60, 1],
+        "file": "Test.png"
+    }
+
+</div>
+<div class="a">
+<p>This gives everything needed. Extracting the key numbers:</p>
+<ul>
+  <li><code>spatialResolution: [819, 1]</code> — 819 hogels</li>
+  <li><code>directionalResolution: [81, 1]</code> — 81 views, HPO confirmed</li>
+  <li><code>displayFOV: [60, 1]</code> → <code>maxAngle = tan(30°) = 0.57735</code></li>
+</ul>
+<p>The formula I derived earlier becomes concrete.</p>
+<hr>
+<p>The key change from Saad's version: instead of <code>dx = D-v</code> for every hogel, each hogel gets its own directional index.</p>
+<pre>python integral_to_quilt_v4.py --config your_config.json --image_path Test.png</pre>
+<p>
+  The <code>--z_cam_hogels</code> parameter lets you tune perspective strength. 
+  The default makes the tan(cameraFOV)=0.5*tan(displayFOV). 
+  A smaller value gives stronger perspective; a larger value approaches the flat orthographic output of v2.
+</p>
+</div>
+
+This quilt is better than any of the Python codes. 
+
+
+</body>
+</html>
