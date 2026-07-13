@@ -1,14 +1,68 @@
-.orange{
-width: 8rem;height: 6rem; position: absolute; top:16rem; left:32rem
+/* Wrapper around the CS418 slide. All hotspot/popup coordinates below are
+   percentages of this wrapper, so they track the image at any size. */
+.slide-wrap {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  max-width: 40rem;
 }
-.orange:hover{
-background-color: rgba(255, 166, 0, 0.525);
+.slide-wrap > img:not(.ortho) {
+  width: 100%;
+  display: block;
 }
-.orange:hover+.ortho{
-display: block;
+
+/* Hotspot over the "Can foreshortening happen in orthographic projection?" box
+   (box occupies 79.8-98.9% x 63.7-87.5% of the 1326x822 slide) */
+.orange {
+  width: 19.5%;
+  height: 23.8%;
+  position: absolute;
+  top: 64%;
+  left: 80%;
+  cursor: pointer;
 }
-.ortho{
-width: 20rem;
-display: none;
-position: absolute; top:15.5rem; left:42rem
+.orange:hover,
+.orange:focus {
+  background-color: rgba(255, 166, 0, 0.525);
+  outline: none;
+}
+.orange:hover + .ortho,
+.orange:focus + .ortho {
+  display: block;
+}
+
+.ortho {
+  width: 50%;
+  display: none;
+  position: absolute;
+  top: 62%;
+  left: 102%;
+  z-index: 10;
+}
+/* not enough room beside the slide on narrower screens: show it below instead */
+@media (max-width: 1399.98px) {
+  .ortho {
+    left: 0;
+    top: 103%;
+    width: 80%;
+  }
+}
+
+/* Wrapper around the teal-annotated middle tile (819x455).
+   Labels are positioned in % of the image and their font scales with it. */
+.quilt-wrap {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  max-width: 819px;
+  container-type: inline-size;
+}
+.quilt-wrap > img {
+  width: 100%;
+  display: block;
+}
+.quilt-label {
+  position: absolute;
+  color: teal;
+  font-size: clamp(0.8rem, 2.75cqw, 1.4rem);
 }

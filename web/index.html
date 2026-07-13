@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Side-by-Side Image Pairs</title>
 
 <!-- Bootstrap CSS -->
@@ -16,79 +17,73 @@
 <div class="container py-4" id="pairs">
   
   <div class="mb-4 text-center">
-    <img src="./all.png" alt="" class=""/>
+    <img src="./all.png" alt="all image pairs" class="img-fluid"/>
   </div>
   <h1 class="mb-4 text-center">Image Pairs</h1>
 </div>
 
-<!-- Bootstrap JS (for responsiveness, not required for basic display) -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-<!-- Your JS -->
-<script src="side_by_side.js"></script>
-
-<div style="margin: 4em;">
+<div class="container my-5">
   <h3>Did you know?</h3>
-  In the <a href="https://www.sciencedirect.com/science/article/pii/S0031320314000235">paper</a> that gave birth to ArUco markers, Sergio Garrido Jurado et al did camera pose estimation to test their fiducial marker.
-  They applied the camera pose estimation to project a virtual scene on their fiducial marker, whereas we applied camera pose estimation to simulate real-world photos.
-  The figure below shows the virtual scene they used.
-  <img src="https://ars.els-cdn.com/content/image/1-s2.0-S0031320314000235-gr1.jpg" alt="virtual scene"/>
+  <p>
+    In the <a href="https://www.sciencedirect.com/science/article/pii/S0031320314000235">paper</a> that gave birth to ArUco markers, Sergio Garrido Jurado et al did camera pose estimation to test their fiducial marker.
+    They applied the camera pose estimation to project a virtual scene on their fiducial marker, whereas we applied camera pose estimation to simulate real-world photos.
+    The figure below shows the virtual scene they used.
+  </p>
+  <img src="https://ars.els-cdn.com/content/image/1-s2.0-S0031320314000235-gr1.jpg" alt="virtual scene" class="img-fluid"/>
   <p>When I saw that green character in the scene, my reaction was:</p>
   <img src="https://media.tenor.com/zlHep5Bp4CsAAAAM/ohhp.gif" alt="I know that guy">
   <p>
     but could not remember who. The whole paper referred to it as merely a "virtual character": the audacityyyy. 
-    There was another figure in the paper that gave a better look of the character:
+    There was another figure in the paper that gave a better look at the character:
   </p>
   
   
   
   <div class="row">
-      <div class="col-xxl-7">
-        <img src="https://ars.els-cdn.com/content/image/1-s2.0-S0031320314000235-gr15.jpg" alt="virtual scene"/>
+      <div class="col-lg-7">
+        <img src="https://ars.els-cdn.com/content/image/1-s2.0-S0031320314000235-gr15.jpg" alt="virtual scene" class="img-fluid"/>
       </div>
-      <div class="col-xxl-4">
+      <div class="col-lg-5">
         
-        It's definitely an ogre - I know when I see one - and then I remembered. This is Sinbad, OGRE's official mascot as of January 2010. 
+        It's definitely an ogre - I know one when I see one - and then I remembered. This is Sinbad, OGRE's official mascot as of January 2010. 
         The character design and 3D model were made by Zi Ye with input from the OGRE community. 
         Sergio Garrido Jurado et al were free to use the model in their paper but given the licence Sinbad was under, they were supposed to give appropriate credit and indicate the change that was made; as seen in the figure, Sinbad is moving around a "virtual floor" which idk is copied from where.
       
       </div>
     </div>
-  <h3>We shall do better.</h3>  
-  <p>
-    We shall do a better job at citation.
-    <div class="animatedSprite" style="width: 819px; height: 455px;"></div>
-    
-    The chess scene you saw in this page is an artwork by <a href="https://www.linkedin.com/in/mgcolbourne/">Matthew Colbourne</a> using the following assets from Polyhaven
-    <div class="container py-4" id="polyhaven">
+  <h3>We shall do better.</h3>
+  <p>We shall do a better job at citation.</p>
+  <div class="animatedSprite" style="width: 100%; max-width: 819px; aspect-ratio: 819 / 455;"></div>
+  <p>The chess scene you saw in this page is an artwork by <a href="https://www.linkedin.com/in/mgcolbourne/">Matthew Colbourne</a> using the following assets from Polyhaven:</p>
+  <div class="container py-4" id="polyhaven">
       <div class="row">
-        <div class="col-xxl-2 text-center">
+        <div class="col-lg-2 text-center">
           <a href="https://polyhaven.com/a/Camera_01">
             <img src="https://cdn.polyhaven.com/asset_img/primary/Camera_01.png?height=760&quality=95" alt="" class="img-fluid">
           </a>
           camera model
         </div>
-        <div class="col-xxl-2 text-center">
+        <div class="col-lg-2 text-center">
           <a href="https://polyhaven.com/a/folding_wooden_stool"><img src="https://cdn.polyhaven.com/asset_img/primary/folding_wooden_stool.png?height=760&quality=95" alt="" class="img-fluid">
           </a>
           folding wooden stool model 
         </div>
-        <div class="col-xxl-2 text-center">
+        <div class="col-lg-2 text-center">
           <a href="https://polyhaven.com/a/modern_arm_chair_01"><img src="https://cdn.polyhaven.com/asset_img/primary/modern_arm_chair_01.png?height=760&quality=95" alt="" class="img-fluid">
           </a>
           modern arm chair model
         </div>
-        <div class="col-xxl-2 text-center">
+        <div class="col-lg-2 text-center">
           <a href="https://polyhaven.com/a/chess_set"><img src="https://cdn.polyhaven.com/asset_img/primary/chess_set.png?height=760&quality=95" alt="" class="img-fluid">
           </a>
           chess set model
         </div>
-        <div class="col-xxl-2 text-center">
+        <div class="col-lg-2 text-center">
           <a href="https://polyhaven.com/a/brass_goblets"><img src="https://cdn.polyhaven.com/asset_img/renders/brass_goblets/orth_side.png?height=760&quality=95" alt="" class="img-fluid">
           </a>
           brass goblets model
         </div>
-        <div class="col-xxl-2 text-center">
+        <div class="col-lg-2 text-center">
           <a href="https://polyhaven.com/a/red_brick">
             <img src="https://cdn.polyhaven.com/asset_img/primary/red_brick.png?height=760&quality=95" alt="" class="img-fluid">
           </a>
@@ -96,13 +91,13 @@
         </div>
       </div>
     </div>
-    
+  <p>
     According to Matt, he used a Python code written by <a href="https://www.linkedin.com/in/saad-equbal/">Saad Equbal</a> to generate a quilt of the scene. 
     The Python code implements a method devised in <a href="https://www.cs.mun.ca/~mhamilton/papers/nwells-hamilton-Necec2021.pdf">the paper</a> by Wells and Hamilton: 
     Having generated a light field image,
     they needed to develop a method to view the generated images. 
     This began with generating 2D images from the light field based on orthographic
-    projections of the light field (taking a single pixel from each hogel all corresponding the same light ray angle).
+    projections of the light field (taking a single pixel from each hogel all corresponding to the same light ray angle).
     The quilt was displayed on a <a href="https://lookingglassfactory.com/looking-glass-16-lightfield">16-inch Looking Glass display</a>.
   </p>
   <p>
@@ -114,15 +109,15 @@
   </p>
   <div class="container">
     <div class="row">
-      <div class="col-xxl-4">
+      <div class="col-lg-4">
         <img src="orthoLRM/converted_quilt_left.png" alt="" style="width: 90%;">
         <p>left</p>
       </div>
-      <div class="col-xxl-4">
+      <div class="col-lg-4">
         <img src="orthoLRM/converted_quilt_middle.png" alt="" style="width: 90%;">
         <p>middle</p>
       </div>
-      <div class="col-xxl-4">
+      <div class="col-lg-4">
         <img src="orthoLRM/converted_quilt_right.png" alt="" style="width: 90%;">
         <p>right</p>
       </div>
@@ -134,22 +129,22 @@
   </p>
   <div class="container">
     <div class="row">
-      <div class="col-xxl-2">
+      <div class="col-lg-2">
         
         The assembled view at the center direction (all hogels looking straight ahead simultaneously) is essentially an orthographic projection — every hogel contributes the pixel directly in front of it. In orthographic projection, near and far edges of the stool appear at their physical width, which for a rectangular stool means near = far. 
         No <strong>foreshortening</strong>. So near doesn't appear wider than far.
       
       </div>
       <div class="col">
-        <div style="position: relative;">
-          <img src="Jesus-modified.png" alt="" style="width: 40rem;">
-          <div style="" class="orange"></div>
+        <div class="slide-wrap">
+          <img src="Jesus-modified.png" alt="CS418 slide defining foreshortening">
+          <div class="orange" tabindex="0"></div>
           <img src="image (1).png" alt="" class="ortho">
         </div>
       </div>
     </div>
     <div class="row">
-      <div class="col-xxl-3">
+      <div class="col-lg-3">
         <div>
           The Spring 2018 offering of CS418 in Grainger Illinois had a whole lecture on <strong>orthographic projections</strong>.
           The definition, used in the lecture, of the word "foreshortening" is a slight adaptation of that provided by <a href="https://webartacademy.com/classical-painting-techniques-in-renaissance">Web Art Academy</a> in January 2011, but <a href="https://courses.grainger.illinois.edu/cs418/sp2018/slides/CS418-Lecture9-OrthoProjection.pdf">the course slide</a> never cited it. 
@@ -157,31 +152,57 @@
           Why does one side of the stool appear shorter than another? Because the wooden stool is angled toward the viewer.
         </div>
       </div>
-      <div class="col" style="position: relative;">
-        <img src="orthoLRM/converted_quilt_middle_teal.png" alt="">
-        <div style="color: teal; font-size: 1.4rem; position: absolute; top: 10rem; right:20rem">horizontal</div>
-        <div style="color: teal; font-size: 1.4rem; position: absolute; top: 8rem; right:25rem">vertical</div>
+      <div class="col">
+        <div class="quilt-wrap">
+          <img src="orthoLRM/converted_quilt_middle_teal.png" alt="middle tile with teal annotation lines">
+          <div class="quilt-label" style="top: 34%; left: 68%;">horizontal</div>
+          <div class="quilt-label" style="top: 27%; left: 62%;">vertical</div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-8">
+        <p>
+          By the Web Art Academy definition of "foreshortening", Christ is foreshortened in the painting: I mean, yeah, there's a reason the painting is also known as "Foreshortened Christ". 
+          By that logic there is foreshortening on the wooden stool in the quilt too. 
+          Yet I said "no foreshortening": yet something seems off in both the painting and the quilt — easier to notice when the foreshortening is on a simple shape as a square, way more difficult to catch when it appears in human form. 
+          Do you see it?
+        </p>
+        <p>
+          Notice Christ's feet. 
+          Now compare those feet with his head. 
+          If drawn correctly the feet would be much larger since they are closer to us, but Mantega painted both almost the same size.
+        </p>
+        <p>
+          While Jill Jeffers Goodell thinks this was his intention, she used the painting by Mantegna as an excellent example,
+          in <a href="https://jillgoodell.blogspot.com/2011/08/august-2011-foreshortening.html">the blog</a>, of how tricky foreshortening can be.
+          Foreshortening's success often depends upon a point of view or perspective in which the sizes of near and far parts of a subject contrast greatly.
+          Goodell cited the <a href="http://www.artcyclopedia.com/scripts/glossary-art-f.html">Artcyclopedia glossary</a> for the definition of "foreshortening". 
+        </p>
+      </div>
+      <div class="col">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi5VWUXJN3NbLLHB0owmLjI0nO1CEVxMsSNX-081IvBHk0Y4Lcrya0f6UxUwdSlbx68ImAeJ4ceFeh1RHsiw6P_6MzqBCSuKAd8swIflERWNfQHGWztCwfOSaodmboX5glrYYEILOEuUz7x/s320/Andrea_Mantegna_-_The_Dead_Christ.jpg" alt="">
       </div>
     </div>
   
-    <div class="row">
+    <p class="mt-3">
       When I said "no foreshortening," I meant that there is no foreshortening based on distance from a viewpoint.
       Now if you look carefully you will see that the left/right tiles are no better. 
       There is equally no foreshortening. The objects are not in true perspective, because they do not correspond to any view of an object that can be obtained in practice.
       You realise that at a glance you only get an optical illusion that makes the stool "look better" at extreme angles.
       At extreme angles, the 3D shape of the stool itself creates perspective-like cues — you see the side panels, legs become prominent... So those tiles accidentally look more correct.
-    </div>
+    </p>
     <div class="row">
-      <div class="col-xxl-3">
-        The annotation on the middle tile using the cyan lines to understand the effects of the orthographic projection is inspired from <a href="https://www.essentialvermeer.com/technique/perspective/about-perspective.html">Essential Vermeer</a>.
+      <div class="col-lg-3">
+        The annotation on the middle tile using the cyan lines to understand the effects of the orthographic projection is inspired by <a href="https://www.essentialvermeer.com/technique/perspective/about-perspective.html">Essential Vermeer</a>.
         They annotated on a painting by Torii Kiyonaga and commented that the Chinese have never had any scientific interest in perspective or its rules.
         It is true that the objects in the painting show similar effect as those in our tiles, and their orthogonal sides recede along two main angles.
         However, Torii Kiyonaga was not Chinese — he was Japanese. The person behind Essential Vermeer is Jonathan Janson, an American art historian — well that explains it.
       </div>
       <div class="col">
-        <img src="https://www.essentialvermeer.com/technique/perspective/images/kyonaga.jpg" alt="">
+        <img src="https://www.essentialvermeer.com/technique/perspective/images/kyonaga.jpg" alt="" class="img-fluid">
       </div>
-      <div class="col"><img src="https://i.redd.it/sbzcsucm27j61.jpg" alt="" style="width: 20rem;"></div>
+      <div class="col"><img src="https://i.redd.it/sbzcsucm27j61.jpg" alt="" style="width: 20rem; max-width: 100%;"></div>
     </div>
   </div>
   
@@ -198,7 +219,7 @@
   </p>
   <div class="container">
     <div class="row">
-      <div class="col-xxl-4">
+      <div class="col-lg-4">
         <p>
           Is this a university thing as CS418 is from Illinois while Wells and Hamilton are from MUN? That's what my initial thought was till I found <a href="https://saurabhg.web.illinois.edu/teaching/ece549/sp2023/slides/lec02_perspective.pdf">the lecture</a> from Spring 2023 offering of ECE549 from Illinois university.
           Let alone differentiating orthographic from general parallel projection, the lecture claims that parallel and perspective views are not like chalk and cheese as one may think — in lieu, parallel projection is just a special case of perspective projection — now who saw that coming!
@@ -206,7 +227,7 @@
         </p>
       </div>
       <div class="col">
-        <img src="Sim.png" alt="" style="width: 24rem">
+        <img src="Sim.png" alt="" style="width: 24rem; max-width: 100%;">
       </div>
     </div>
   </div>
@@ -231,7 +252,7 @@
     I guess there were people who realised this before me and so in the <a href="https://www.youtube.com/watch?v=f1LCDsPjobo">video</a> where Jurado demonstrates ArUco there are comments - asking for the source code - that are not attended to.
   </p>
   <div class="row">
-    <div class="col-xxl-4">
+    <div class="col-lg-4">
       <p>
         By the way, when I say we will never know how they used their 6 DoFs to project their virtual scene, I do not mean we will never know how to do the same thing they did.
         There is <a href="https://www.youtube.com/watch?v=hgtjp1jSeB4&lc=UgwGF4jUmWMU_IxUPyR4AaABAg">this video</a> where Kevin Wood overlays a 3D model Baby Yoda on a real scene. 
@@ -239,7 +260,7 @@
       </p>
     </div>
     <div class="col">
-      <img src=" http://img.youtube.com/vi/hgtjp1jSeB4/mqdefault.jpg" alt="">
+      <img src="https://img.youtube.com/vi/hgtjp1jSeB4/mqdefault.jpg" alt="" class="img-fluid">
     </div>
   </div>
   
@@ -247,12 +268,13 @@
   <p>
     Can't always expect altruism in the capitalist world, can we?
     But sometimes, it's Christmas:
-    <div class="row">
-      <div class="col-xxl-5"><img src="https://img.youtube.com/vi/Zvmoz_OhOok/maxresdefault.jpg" alt="" class="img-fluid"></div>
-      <div class="col-xxl-6">
+  </p>
+  <div class="row">
+      <div class="col-lg-5"><img src="https://img.youtube.com/vi/Zvmoz_OhOok/maxresdefault.jpg" alt="" class="img-fluid"></div>
+      <div class="col-lg-7">
         OpenCV has a module called ovis; ovis is a simplified rendering wrapper around ogre3d; 
-        in fact the word "ovis" is a diminuitive of "OGRE 3D Visualiser".
-        Around Christmas 2020 Pavel Rojtberg wrote <a href="https://www.ogre3d.org/2020/12/24/augmented-reality-made-simple-with-ogre-and-opencv">this</a> free article teaching you how to project 3D Sindbad on an object using ovis.
+        in fact the word "ovis" is a diminutive of "OGRE 3D Visualiser".
+        Around Christmas 2020 Pavel Rojtberg wrote <a href="https://www.ogre3d.org/2020/12/24/augmented-reality-made-simple-with-ogre-and-opencv">this</a> free article teaching you how to project 3D Sinbad on an object using ovis.
         Yes, we will still never know how exactly Jurado did that but I personally think Jurado too used ovis - I mean there has to be some reason for using the mascot of Ogre3D as their virtual character - right?
         
         When you look at the list of modules in your OpenCV contrib, the reason you don’t see ovis in your list is because the ovis module in OpenCV contrib is not included by default in the Python builds on Windows.
@@ -264,9 +286,7 @@
         </ul>
       </div>
     </div>
-    </p>
   <p>
-    
     The ovis module has a class WindowScene which is the associated scene and a 3D viewport caused by its virtual camera. 
     The ovis module works very well with the aruco module. OpenCV gives us the pose of the fiducial object with respect to the camera, not the camera pose with respect to the object. 
     But to the <code>setCameraPose()</code> method of WindowScene, if we pass the pose from the aruco module and set the boolean argument <code>invert=True</code>, ovis does the calculations behind its veil and finds the camera pose.
@@ -276,7 +296,7 @@
   <p>
     Maybe in a lot of projects around but <b>not in our one</b>.
     As a programmer, ovis would be convenient for this project but would also burden it with a heavy dependency.
-    The project currently does not demand a 3D rendering, at least not a rendering that demands a Ogre window, so given the state of this project ovis has been avoided. 
+    The project currently does not demand a 3D rendering, at least not a rendering that demands an Ogre window, so given the state of this project ovis has been avoided. 
   </p>
   <h4>The camera pose estimation thing from Jurado's paper is already implemented in OpenCV, MATLAB etc.: your project is just about following their tutorial?</h4>
   <p>
@@ -291,12 +311,12 @@
   </p>
   <div class="container">
     <div class="row">
-      <div class="col-xxl-6 text-center">
-        <img src="https://docs.opencv.org/4.5.5/chaxis.jpg" alt=""/>
+      <div class="col-lg-6 text-center">
+        <img src="https://docs.opencv.org/4.5.5/chaxis.jpg" alt="ChArUco board axis in OpenCV 4.5.5" class="img-fluid"/>
         Charuco Board Axis. OpenCV version 4.5.5
       </div>
-      <div class="col-xxl-6 text-center">
-        <img src="https://docs.opencv.org/4.6.0/chaxis.jpg" alt=""/>
+      <div class="col-lg-6 text-center">
+        <img src="https://docs.opencv.org/4.6.0/chaxis.jpg" alt="ChArUco board axis in OpenCV 4.6.0" class="img-fluid"/>
         Charuco Board Axis. OpenCV version 4.6.0
       </div>
     </div> 
@@ -305,11 +325,11 @@
     Both images are of the same ChArUco board in the same orientation. 
     For 4.5.5 image we can see that indeed the coordinate system of the CharucoBoard is placed in the board plane with the Z axis pointing out, and centered in the bottom left corner of the board.
     But in 4.6.0 the coordinate system of the CharucoBoard is placed in the board plane:
-    <ul>
-      <li>with the Z axis pointing into the board plane</li>
-      <li>centered in the top-left corner of the board</li>
-    </ul>
   </p>
+  <ul>
+    <li>with the Z axis pointing into the board plane</li>
+    <li>centered in the top-left corner of the board</li>
+  </ul>
   
   <p>The man behind this change is Alexander Panov who fixed the object points order in ChArUco board.</p>
   <!-- <h3>Why this project?</h3>
@@ -324,7 +344,7 @@
   </p> -->
   <!-- <h3>Why Matthew Hamilton?</h3>
   <div class="row">
-    <div class="col-xxl-7">
+    <div class="col-lg-7">
       <p>
         Now this is a question anyone who intends to do an Honours should have an answer to, or to extend the question: which professor should I reach out?
         I got variations of this question when people got to know I was doing an Honours thesis: 
@@ -338,7 +358,7 @@
         I wanted to use, or at least see, a holographic display at least once in my life.
       </p>
     </div>
-    <div class="col-xxl-3">
+    <div class="col-lg-3">
       <img src="https://scholar.googleusercontent.com/citations?view_op=medium_photo&user=PWi6hlkAAAAJ&citpid=4" alt="">
     </div>
     
@@ -349,10 +369,10 @@
   
   <h3>Why holographic displays?</h3>
   <div class="row">
-    <div class="col-xxl-2">
+    <div class="col-lg-2">
       <img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1575587271l/52290273.jpg" alt="" class="w-100">
     </div>
-    <div class="col-xxl-9">
+    <div class="col-lg-9">
       <p>
         I never watched a single episode or film from the Star Trek TV and movie franchise. 
         In 2021 I learned about the franchise from the book that claimed the Holodeck to be the most immersive form of entertainment.
@@ -373,5 +393,10 @@
   </div> -->
   
 </div>
+<!-- Bootstrap JS (for responsiveness, not required for basic display) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Your JS -->
+<script src="side_by_side.js"></script>
 </body>
 </html>
