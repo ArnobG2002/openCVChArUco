@@ -177,7 +177,6 @@
           While Jill Jeffers Goodell thinks this was his intention, she used the painting by Mantegna as an excellent example,
           in <a href="https://jillgoodell.blogspot.com/2011/08/august-2011-foreshortening.html">the blog</a>, of how tricky foreshortening can be.
           Foreshortening's success often depends upon a point of view or perspective in which the sizes of near and far parts of a subject contrast greatly.
-          Goodell cited the <a href="http://www.artcyclopedia.com/scripts/glossary-art-f.html">Artcyclopedia glossary</a> for the definition of "foreshortening". 
         </p>
       </div>
       <div class="col">
@@ -185,8 +184,8 @@
       </div>
     </div>
   
-    <p class="mt-3">
-      When I said "no foreshortening," I meant that there is no foreshortening based on distance from a viewpoint.
+    <p>
+      Goodell cited the Artcyclopedia glossary for the definition of "foreshortening" and this definition is what I meant by "no foreshortening" — there is no foreshortening based on distance from a viewpoint.
       Now if you look carefully you will see that the left/right tiles are no better. 
       There is equally no foreshortening. The objects are not in true perspective, because they do not correspond to any view of an object that can be obtained in practice.
       You realise that at a glance you only get an optical illusion that makes the stool "look better" at extreme angles.
@@ -194,8 +193,8 @@
     </p>
     <div class="row">
       <div class="col-lg-3">
-        The annotation on the middle tile using the cyan lines to understand the effects of the orthographic projection is inspired by <a href="https://www.essentialvermeer.com/technique/perspective/about-perspective.html">Essential Vermeer</a>.
-        They annotated on a painting by Torii Kiyonaga and commented that the Chinese have never had any scientific interest in perspective or its rules.
+        The annotation on the middle tile — the cyan lines for understanding the effects of the orthographic projection — is inspired by <a href="https://www.essentialvermeer.com/technique/perspective/about-perspective.html">Essential Vermeer</a>.
+        They annotated a painting by Torii Kiyonaga and commented that the Chinese have never had any scientific interest in perspective or its rules.
         It is true that the objects in the painting show similar effect as those in our tiles, and their orthogonal sides recede along two main angles.
         However, Torii Kiyonaga was not Chinese — he was Japanese. The person behind Essential Vermeer is Jonathan Janson, an American art historian — well that explains it.
       </div>
@@ -222,7 +221,7 @@
       <div class="col-lg-4">
         <p>
           Is this a university thing as CS418 is from Illinois while Wells and Hamilton are from MUN? That's what my initial thought was till I found <a href="https://saurabhg.web.illinois.edu/teaching/ece549/sp2023/slides/lec02_perspective.pdf">the lecture</a> from Spring 2023 offering of ECE549 from Illinois university.
-          Let alone differentiating orthographic from general parallel projection, the lecture claims that parallel and perspective views are not like chalk and cheese as one may think — in lieu, parallel projection is just a special case of perspective projection — now who saw that coming!
+          Far from differentiating orthographic from general parallel projection, the lecture claims that parallel and perspective views are not like chalk and cheese as one may think — rather, parallel projection is just a special case of perspective projection — now who saw that coming!
           Interesting. We shall broaden our project to include perspective projection. But seems like a lame justification to include a feature just because we can — would a light field display ever require generation of perspective views?
         </p>
       </div>
@@ -275,7 +274,7 @@
         OpenCV has a module called ovis; ovis is a simplified rendering wrapper around ogre3d; 
         in fact the word "ovis" is a diminutive of "OGRE 3D Visualiser".
         Around Christmas 2020 Pavel Rojtberg wrote <a href="https://www.ogre3d.org/2020/12/24/augmented-reality-made-simple-with-ogre-and-opencv">this</a> free article teaching you how to project 3D Sinbad on an object using ovis.
-        Yes, we will still never know how exactly Jurado did that but I personally think Jurado too used ovis - I mean there has to be some reason for using the mascot of Ogre3D as their virtual character - right?
+        Yes, we will still never know how exactly Jurado did that but I personally think Jurado too used ovis's ancestor, Ogre3D - I mean there has to be some reason for using the mascot of Ogre3D as their virtual character - right?
         
         When you look at the list of modules in your OpenCV contrib, the reason you don’t see ovis in your list is because the ovis module in OpenCV contrib is not included by default in the Python builds on Windows.
         Here’s why:
@@ -294,8 +293,8 @@
   </p>
   <h3>Camera pose estimation is essentially a collaboration between aruco and ovis?</h3>
   <p>
-    Maybe in a lot of projects around but <b>not in our one</b>.
-    As a programmer, ovis would be convenient for this project but would also burden it with a heavy dependency.
+    Maybe in a lot of projects out there but <b>not in ours</b>.
+    As a programmer, I would find ovis convenient for this project but it would also burden the project with a heavy dependency.
     The project currently does not demand a 3D rendering, at least not a rendering that demands an Ogre window, so given the state of this project ovis has been avoided. 
   </p>
   <h4>The camera pose estimation thing from Jurado's paper is already implemented in OpenCV, MATLAB etc.: your project is just about following their tutorial?</h4>
@@ -306,8 +305,8 @@
     Maybe MATLAB's implementation of ChArUco is different from that of OpenCV, right? Yes and no, let's clarify this.
   </p>
   <p>
-    ChArUco came to MATLAB only in 2024. By 2024 OpenCV saw a lot of changes in its ChArUco but the "bottom left" remained like a zombie in all the versions, written till date (2025-08-31), of the tutorial.
-    Let us spot the grave of this "bottom left" to give peace to its soul.
+    ChArUco came to MATLAB only in 2024. By 2024 OpenCV saw a lot of changes in its ChArUco but the "bottom left" remained like a zombie in every version of the tutorial (last checked 2025-08-31).
+    Let us spot the grave of this "bottom left" to lay its soul to rest.
   </p>
   <div class="container">
     <div class="row">
