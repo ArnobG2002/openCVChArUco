@@ -66,7 +66,7 @@
   function injectStyles() {
     var css = [
       ".bg-download-wrap{position:relative;display:inline-block;max-width:100%;width:100%;}",
-      ".bg-download-btn{position:absolute;top:8px;right:30rem;z-index:5;",
+      ".bg-download-btn{position:absolute;top:8px;right:15%;z-index:5;",
       "display:inline-flex;align-items:center;gap:.35em;",
       "padding:.35em .7em;border-radius:6px;font:500 13px/1.2 system-ui,sans-serif;",
       "background:rgba(0,0,0,.65);color:#fff;text-decoration:none;",
