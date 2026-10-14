@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Light Field Ray Fan — Three.js</title>
+
+    <link rel="stylesheet" href="css/styles.css" />
+
+    <!--
+      Import map: lets the ES modules in js/ write bare specifiers
+      ("three", "three/addons/...") instead of full CDN URLs.
+      Swap the version/host here to pin or self-host.
+    -->
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+        }
+      }
+    </script>
+  </head>
+
+  <body>
+    <div id="app"></div>
+    <p id="hint">drag to orbit · scroll to zoom</p>
+
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>

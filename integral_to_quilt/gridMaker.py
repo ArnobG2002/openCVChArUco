@@ -49,5 +49,5 @@ def main():
     convert(args.directional_resolution, args.rows, args.columns, args.filename)
 
 
-# if __name__ == "__main__":
-#     main()
+if __name__ == "__main__":
+    main()

@@ -17,6 +17,8 @@
     font-size: 12px;
     line-height: 1.8;
     min-width: 230px;
+    max-height: calc(100vh - 24px);
+    overflow-y: auto;
   }
   #hud .label { color: #8b949e; }
   #hud .val   { color: #79c0ff; }
@@ -28,6 +30,13 @@
     accent-color: #79c0ff;
     margin-top: 2px;
     cursor: pointer;
+  }
+
+  #tileStatus {
+    color: #8b949e;
+    font-size: 11px;
+    font-style: italic;
+    margin-top: 2px;
   }
 </style>
 </head>
@@ -46,6 +55,7 @@
   <div><span class="label">cam idx: </span><span class="val" id="hCI">–</span></div>
   <div><span class="label">x_cam: </span><span class="val" id="hCX">–</span></div>
   <div><span class="label">θ: </span><span class="val" id="hCT">–</span></div>
+  <div id="tileStatus">run server.py to enable</div>
   <div class="tip">
     A / D — step camera left / right<br>
     scroll — zoom · drag — pan<br>

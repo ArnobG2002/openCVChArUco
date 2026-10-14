@@ -59,5 +59,5 @@ def main():
     final_img = convert(args.image_path, args.num_sub_images, args.directional_resolution)
     final_img.save('converted_quilt.png')
 
-# if __name__ == "__main__":
-#     main()
+if __name__ == "__main__":
+    main()

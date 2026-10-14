@@ -1,0 +1,41 @@
+.animatedSprite {
+  
+  background-image: url("./converted_quilt.png");
+  /* background-repeat: no-repeat; */
+  /* duration, timing function, number of iterations, animation name */
+  animation: 9s steps(81) infinite sprite-animation;
+}
+.animatedSprite1 {
+  
+  background-image: url("./quilt_v4.png");
+  /* background-repeat: no-repeat; */
+  /* duration, timing function, number of iterations, animation name */
+  animation: 
+  1s steps(9) infinite sprite-animation-1,
+  9s steps(9) infinite sprite-animation-2;
+}
+
+@keyframes sprite-animation {
+  0% {
+    background-position-x: 66339px;
+  }
+  100% {
+    background-position-x: 0;
+  }
+}
+@keyframes sprite-animation-1 {
+  0% {
+    background-position-x: 7371px;
+  }
+  100% {
+    background-position-x: 0;
+  }
+}
+@keyframes sprite-animation-2 {
+  0% {
+    background-position-y: 0;
+  }
+  100% {
+    background-position-y: 4095px;
+  }
+}

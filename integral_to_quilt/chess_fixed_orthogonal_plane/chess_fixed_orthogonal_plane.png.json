@@ -1,0 +1,21 @@
+{
+    "movie": false,
+    "mediaType": "quilt",
+    "quilt_settings": {
+        "viewX": 9,
+        "viewY": 9,
+        "viewTotal": 81,
+        "invertViews": false,
+        "aspect": -1.0
+    },
+    "depthiness": 1.0,
+    "depthInversion": false,
+    "chromaDepth": false,
+    "depthPosition": "right",
+    "focus": 0.0,
+    "viewOrderReversed": false,
+    "zoom": 1.0,
+    "position_x": 0.0,
+    "position_y": 0.0,
+    "duration": 10.0
+}

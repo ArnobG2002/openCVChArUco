@@ -36,4 +36,4 @@ ax.legend(bbox_to_anchor=(0, -0.4, 1, 1), loc='lower left',
                       ncols=6, mode="expand", borderaxespad=0.)
 ax.grid(True)
 plt.savefig('all.png', dpi=100)
-plt.show()
+#plt.show()
