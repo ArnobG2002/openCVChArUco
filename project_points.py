@@ -16,6 +16,8 @@ def projectPoints(charucoIds, charucoCorners, img_name, cameraMatrix, distCoeffs
     img= cv2.imread(img_name)
     
     cv2.drawFrameAxes(img, cameraMatrix, distCoeffs, rvec, tvec, length=341.4/16, thickness=10)
+    # if(img_name[23:]=="0.png"):
+    #     print("imgPoints_proj", imgPoints_proj)
     # Draw comparison between detected and projected points
     for detected, projected in zip(charucoCorners, imgPoints_proj):
         x1, y1 = int(detected[0][0]), int(detected[0][1])  # Detected
@@ -26,7 +28,7 @@ def projectPoints(charucoIds, charucoCorners, img_name, cameraMatrix, distCoeffs
 
         # Projected point (red)
         cv2.circle(img, (x2, y2), 5, (0, 0, 255), -1)
-
+        
         # Error line (white)
         cv2.line(img, (x1, y1), (x2, y2), (255, 255, 255), 1)
 
