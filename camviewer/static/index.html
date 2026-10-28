@@ -1,0 +1,183 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Camera Rig Top View</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<!-- Required CSS -->
+
+<style>
+  .image-grid-2x2 {
+    display: grid;
+    /* Creates exactly two columns of equal width */
+    grid-template-columns: repeat(2, 1fr); 
+    /* Adjusts the space between your figures */
+    gap: 16px; 
+  }
+  
+  /* Optional: Ensures images stay inside their grid blocks cleanly */
+  .image-grid-2x2 img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+/* Layout: plot panel on top, camera detail cards below; clicking an eye scrolls to its card */
+:root{
+  --bg:#f5f6f8; --panel:#ffffff; --fg:#1c2230; --muted:#5d6678; --line:#d9dde5;
+  --accent:#2f5bd3; --fold:#1f4fd1; --frustum:rgba(90,100,120,.12);
+  --sans:"IBM Plex Sans",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#12151c; --panel:#1a1f29; --fg:#e4e8f0; --muted:#97a0b2; --line:#2c3342;
+  --accent:#7d9cff; --fold:#7d9cff; --frustum:rgba(170,180,200,.10); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#12151c; --panel:#1a1f29; --fg:#e4e8f0; --muted:#97a0b2; --line:#2c3342;
+  --accent:#7d9cff; --fold:#7d9cff; --frustum:rgba(170,180,200,.10); color-scheme:dark}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:24px}
+main{max-width:100%;margin:0 auto;display:grid;gap:20px}
+h1{font-size:1.4rem;margin:0;text-wrap:balance}
+.sub{color:var(--muted);margin:4px 0 0;max-width:65ch;line-height:1.5}
+.loader{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.btn{font:inherit;font-weight:600;background:var(--accent);color:var(--bg);border:0;border-radius:6px;padding:9px 14px;cursor:pointer}
+.btn:focus-visible,.card:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.status{font-family:var(--mono);font-size:.85rem;color:var(--muted)}
+.status.err{color:#c0392b}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:12px;overflow-x:auto}
+svg{display:block;width:100%;min-width:520px;height:auto;font-family:var(--mono)}
+.tick{fill:var(--muted);font-size:11px}
+.grid{stroke:var(--line);stroke-width:1}
+.axis{fill:var(--fg);font-size:12px;font-family:var(--sans)}
+.eye{cursor:pointer}
+.eye:hover circle,.eye.active circle{stroke:var(--fg);stroke-width:2.5}
+.cards{}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:12px 14px;scroll-margin-top:20px;min-width:0;transition:box-shadow .3s}
+.card.flash{box-shadow:0 0 0 3px var(--accent)}
+.card h3{margin:0 0 8px;font-size:1rem;display:flex;gap:8px;align-items:center;overflow-wrap:anywhere}
+.sw{width:12px;height:12px;border-radius:50%;flex:none}
+dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-family:var(--mono);font-size:.85rem;font-variant-numeric:tabular-nums}
+dt{color:var(--muted)} dd{margin:0;overflow-wrap:anywhere}
+figure{margin:0 0 10px} figure img{display:block;width:100%;border-radius:4px;background:var(--line)}
+figcaption{font-size:.75rem;color:var(--muted);margin-top:3px}
+.empty{color:var(--muted);text-align:center;padding:24px}
+@media (prefers-reduced-motion:reduce){.card{transition:none}}
+</style></head><body>
+
+<main>
+  <header>
+    <h1>Camera Rig Top View (XZ plane)</h1>
+    <p class="sub">Cameras listed in <code>JsonStructure.json</code>, read by the server from its working folder. Click an eye to jump to its details.</p>
+  </header>
+  <div class="loader"><button class="btn" id="reload" type="button">Reload data</button><span class="status" id="status">Loading…</span></div>
+  <div class="panel"><svg id="plot" viewBox="0 0 900 440" role="img" aria-label="Top-down camera plot"></svg></div>
+  <section class="cards" id="cards"><div class="empty">Camera details appear here once files are loaded.</div></section>
+</main>
+
+<script>
+// Display geometry copied from topdown.py: the FoLD spans 341.4 mm, offset by 1/16,
+// and each edge has a 30 degree shaded cone reaching 800 mm out.
+// "Let your light so shine before men, that they may see." (Matthew 5:16)
+const W=341.4, FOLD=[-W/16,(15/16)*W], CONE=200, T=Math.tan(Math.PI/3);
+// matplotlib quiver with scale=0.01 and scale_units='xy' draws each arrow 100 times
+// the eye-to-lookat vector, so the same factor is kept here.
+// "A little leaven leaveneth the whole lump." (Galatians 5:9)
+const ARROW=1/0.01;
+const NS="http://www.w3.org/2000/svg", svg=document.getElementById('plot');
+const statusEl=document.getElementById('status'), cardsEl=document.getElementById('cards');
+const el=(t,a={},p=svg)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);p.appendChild(e);return e};
+const base=p=>p.split(/[\\/]/).pop();
+const fmt=v=>Array.isArray(v)?'['+v.map(n=>+(+n).toFixed(3)).join(', ')+']':String(v);
+
+function setStatus(m,err){statusEl.textContent=m;statusEl.classList.toggle('err',!!err)}
+
+// The server does the reading and returns the cameras plus any listed files it could not find.
+// "Ask, and it shall be given you." (Matthew 7:7)
+async function load(){
+  setStatus('Loading…');
+  try{
+    const r=await fetch('/api/cameras');
+    const d=await r.json();
+    if(!r.ok) return setStatus(d.error,true);
+    draw(d.cameras);
+    setStatus(`${d.cameras.length} camera${d.cameras.length===1?'':'s'} loaded`+(d.missing.length?`; missing: ${d.missing.join(', ')}`:''),d.missing.length>0);
+  }catch(e){setStatus('Could not reach the server: '+e.message,true)}
+}
+
+function draw(cams){
+  svg.innerHTML='';
+  cams.forEach((c,i)=>c.color=`hsl(${Math.round(i*360/Math.max(cams.length,1))} 65% 50%)`);
+  // Bounds cover the display, both cones and every eye and arrow tip.
+  const xs=[FOLD[0]-CONE*T,FOLD[1]+CONE*T], zs=[0,CONE];
+  cams.forEach(c=>{xs.push(c.eye[0],c.eye[0]+(c.lookat[0]-c.eye[0])*ARROW);zs.push(c.eye[2],c.eye[2]+(c.lookat[2]-c.eye[2])*ARROW)});
+  let [x0,x1]=[Math.min(...xs),Math.max(...xs)],[z0,z1]=[Math.min(...zs),Math.max(...zs)];
+  const pad=.05*Math.max(x1-x0,z1-z0); x0-=pad;x1+=pad;z0-=pad;z1+=pad;
+  const L=70,R=880,Tp=0,B=390, sx=(R-L)/(x1-x0), sz=(B-Tp)/(z1-z0);
+  const X=x=>L+(x-x0)*sx, Z=z=>B-(z-z0)*sz;   // Z grows upward, as in matplotlib
+  const step=v=>{const r=v/8,m=10**Math.floor(Math.log10(r));return [1,2,5,10].map(k=>k*m).find(k=>k>=r)};
+  const gx=step(x1-x0), gz=step(z1-z0);
+  for(let v=Math.ceil(x0/gx)*gx;v<=x1;v+=gx){el('line',{x1:X(v),x2:X(v),y1:Tp,y2:B,class:'grid'});el('text',{x:X(v),y:B+16,'text-anchor':'middle',class:'tick'}).textContent=+v.toFixed(6)}
+  for(let v=Math.ceil(z0/gz)*gz;v<=z1;v+=gz){el('line',{x1:L,x2:R,y1:Z(v),y2:Z(v),class:'grid'});el('text',{x:L-6,y:Z(v)+4,'text-anchor':'end',class:'tick'}).textContent=+v.toFixed(6)}
+  el('text',{x:(L+R)/2,y:B+40,'text-anchor':'middle',class:'axis'}).textContent='X (mm)';
+  el('text',{x:16,y:(Tp+B)/2,'text-anchor':'middle',class:'axis',transform:`rotate(-90 16 ${(Tp+B)/2})`}).textContent='Z (mm)';
+  for(const e of FOLD) el('polygon',{points:`${X(e)},${Z(0)} ${X(e-CONE*T)},${Z(CONE)} ${X(e+CONE*T)},${Z(CONE)}`,fill:'var(--frustum)'});
+  el('line',{x1:X(FOLD[0]),x2:X(FOLD[1]),y1:Z(0),y2:Z(0),stroke:'var(--fold)','stroke-width':3});
+  el('text',{x:X(FOLD[1])+6,y:Z(0)-6,class:'tick'}).textContent='FoLD';
+
+  const defs=el('defs');
+  cardsEl.innerHTML=cams.length?'':'<div class="empty">No camera files matched.</div>';
+  cams.forEach((c,i)=>{
+    const id='cam-'+i;
+    const m=el('marker',{id:'h'+i,viewBox:'0 0 10 10',refX:9,refY:5,markerWidth:7,markerHeight:7,orient:'auto'},defs);
+    el('path',{d:'M0 0L10 5L0 10z',fill:c.color},m);
+    const g=el('g',{class:'eye',tabindex:0,role:'link','aria-label':'Show details for '+c.name});
+    el('line',{x1:X(c.eye[0]),y1:Z(c.eye[2]),x2:X(c.eye[0]+(c.lookat[0]-c.eye[0])*ARROW),y2:Z(c.eye[2]+(c.lookat[2]-c.eye[2])*ARROW),stroke:c.color,'stroke-width':2,'marker-end':`url(#h${i})`},g);
+    el('circle',{cx:X(c.eye[0]),cy:Z(c.eye[2]),r:6,fill:c.color},g);
+    el('title',{},g).textContent=c.name;
+    const card=document.createElement('div');
+    card.className='card';card.id=id;card.tabIndex=-1;
+    card.innerHTML=`<h3><span class="sw" style="background:${c.color}"></span></h3>
+    <!-- Grid Container Wrap -->
+    <div class="image-grid-2x2">
+      <figure>
+        <img alt="Downsampled view">
+        <figcaption>Downsampled</figcaption>
+      </figure>
+      <figure>
+        <img alt="Raw view" loading="lazy">
+        <figcaption>Raw 150(NEF)</figcaption>
+      </figure>
+      <figure>
+        <img alt="Raw view" loading="lazy">
+        <figcaption>Raw 200(NEF)</figcaption>
+      </figure>
+      <figure>
+        <img alt="Raw view" loading="lazy">
+        <figcaption>Raw 300(NEF)</figcaption>
+      </figure>
+    </div>
+
+
+
+    <dl><dt>Eye</dt><dd>${fmt(c.eye)}</dd><dt>Lookat</dt><dd>${fmt(c.lookat)}</dd><dt>File</dt><dd></dd></dl>`;
+    card.querySelector('h3').append(c.name);
+    // Both images share the base name cut from the camera file's path.
+    // "Two are better than one." (Ecclesiastes 4:9)
+    const stem=encodeURIComponent(c.file.slice(23,-5));
+    const imgs=card.querySelectorAll('img');
+    imgs[0].src='/files/Downsampled/'+stem+'.png';
+    imgs[1].src='/files/chaarAdhyay/'+stem+'/150.nef';
+    imgs[2].src='/files/chaarAdhyay/'+stem+'/200.nef';
+    imgs[3].src='/files/chaarAdhyay/'+stem+'/300.nef';
+    imgs.forEach(im=>im.addEventListener('error',()=>{im.closest('figure').querySelector('figcaption').textContent+=' (could not load, see server console)'}));
+    card.querySelectorAll('dd')[2].textContent=c.file;
+    cardsEl.appendChild(card);
+    const go=()=>{
+      svg.querySelectorAll('.eye.active').forEach(e=>e.classList.remove('active'));g.classList.add('active');
+      const smooth=!matchMedia('(prefers-reduced-motion: reduce)').matches;
+      card.scrollIntoView({behavior:smooth?'smooth':'auto',block:'center'});
+      card.focus({preventScroll:true});card.classList.add('flash');setTimeout(()=>card.classList.remove('flash'),1200);
+    };
+    g.addEventListener('click',go);
+    g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go()}});
+  });
+}
+document.getElementById('reload').addEventListener('click',load);
+draw([]);load();
+</script>
+</body></html>
