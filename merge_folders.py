@@ -2,7 +2,7 @@ import os
 import shutil
 
 # Change these to your actual directory paths
-source_dir = r"C:\openCV\zoom_18"
+source_dir = r"C:\openCV\Liberal"
 dest_dir = r"C:\openCV\chaarAdhyay"
 
 def safe_merge(source, dest):
