@@ -205,7 +205,7 @@ def calibrate_and_save_parameters(calibrate):
         plt.show()
     # Calibrate camera
     #print("\n All ChAruCo ids \n", all_charuco_ids, "\n All ChArUco corners \n", all_charuco_corners)
-    retval, camera_matrix, dist_coeffs, rvecs, tvecs = cv2.aruco.calibrateCameraCharuco(all_charuco_corners, all_charuco_ids, board, image.shape[:2], None, None)
+    retval, camera_matrix, dist_coeffs, rvecs, tvecs = cv2.aruco.calibrateCameraCharuco(all_charuco_corners, all_charuco_ids, board, image.shape[1::-1], None, None)
     np.save('camera_matrix.npy', camera_matrix)
     np.save('dist_coeffs.npy', dist_coeffs)
     np.save('rvecs.npy', rvecs)
